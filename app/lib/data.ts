@@ -9,6 +9,29 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
+type TestItem = {
+  userId:number,
+  id: number,
+  title:string,
+  body:string
+}
+
+export async function fetchTest(): Promise<TestItem | null> {
+  console.log("JSON API 서버에 요청을 매번 보내나요?") // 매번 보냄. 왜 캐싱되지않을까?
+  const url = 'https://jsonplaceholder.typicode.com/posts/1';
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data: TestItem = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return null;
+  }
+}
+
 export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.

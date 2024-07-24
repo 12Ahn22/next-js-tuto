@@ -2,9 +2,10 @@ import { Card } from '@/app/ui/dashboard/cards';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
-import { fetchRevenue, fetchLatestInvoices, fetchCardData } from '@/app/lib/data';
+import { fetchRevenue, fetchLatestInvoices, fetchCardData, fetchTest } from '@/app/lib/data';
 
 export default async function Page() {
+  // 여기서 await를 써야만 하나?
   const revenue = await fetchRevenue();
   const latestInvoices = await fetchLatestInvoices();
   const {
@@ -13,6 +14,8 @@ export default async function Page() {
     totalPaidInvoices,
     totalPendingInvoices,
   } = await fetchCardData();
+
+  const tests = await fetchTest();
 
   return (
     <main>
@@ -29,6 +32,9 @@ export default async function Page() {
           type="customers"
         />
       </div>
+      {
+        tests && <div>외부 라이브러리 테스트 - {tests.title}</div>
+      }
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <RevenueChart revenue={revenue}  />
         <LatestInvoices latestInvoices={latestInvoices} />
