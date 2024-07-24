@@ -16,9 +16,9 @@ type TestItem = {
   body:string
 }
 
-export async function fetchTest(): Promise<TestItem | null> {
+export async function fetchTest(id:number): Promise<TestItem | null> {
   console.log("JSON API 서버에 요청을 매번 보내나요?") // 매번 보냄. 왜 캐싱되지않을까?
-  const url = 'https://jsonplaceholder.typicode.com/posts/1';
+  const url = `https://jsonplaceholder.typicode.com/posts/${id}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {

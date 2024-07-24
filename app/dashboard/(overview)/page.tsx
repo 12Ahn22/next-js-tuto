@@ -18,7 +18,7 @@ export default async function Page() {
   //   totalPendingInvoices,
   // } = await fetchCardData();
 
-  const tests = await fetchTest();
+  const tests = await fetchTest(1);
 
   return (
     <main>
